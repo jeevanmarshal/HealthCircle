@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+@import "global";
+
+$primary-color: #2563eb; // Tailwind blue-600
+
+body {
+  background-color: #f9fafb; // Tailwind gray-50
+  color: #333;
+  font-family: sans-serif;
+}
+
+.custom-btn {
+  background-color: $primary-color;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}

@@ -1,0 +1,88 @@
+healthcircle-frontend/
+│
+├── src/
+│   ├── components/
+│   │   ├── Navbar.js
+│   │   ├── MedicineForm.js
+│   │   ├── AppointmentForm.js
+│   │   ├── Dashboard.js
+│   │   ├── ReminderCard.js
+│   │   └── ReportUploader.js
+│   │
+│   ├── pages/
+│   │   ├── Login.js
+│   │   ├── Signup.js
+│   │   ├── FamilyDashboard.js
+│   │   ├── Reports.js
+│   │   └── Analytics.js
+│   │
+│   ├── utils/
+│   │   └── api.js
+│   │
+│   ├── styles/
+│   │   └── main.css
+│   │
+│   ├── App.js
+│   ├── index.js
+│   └── routes.js
+│
+├── package.json
+└── README.md
+
+
+
+
+
+📘 Description of Each Folder
+🧩 components/
+
+Reusable UI blocks used across multiple pages.
+
+File	Purpose
+Navbar.js	Contains navigation bar with links (Dashboard, Reports, Analytics, Logout).
+MedicineForm.js	Form for adding/editing medicine details (name, dosage, time, duration).
+AppointmentForm.js	Form to schedule doctor visits and track upcoming appointments.
+Dashboard.js	Main home page showing daily medicine reminders, stats, and alerts.
+ReminderCard.js	Small card showing medicine name, time, and status (“Taken” / “Missed”).
+ReportUploader.js	Upload and view PDF/image medical reports (uses Firebase or local preview).
+📄 pages/
+
+Each page represents a route (like a screen in an app).
+
+Page	Description
+Login.js	Secure login page with JWT integration (email + password).
+Signup.js	Registration page — includes name, email, password, and family circle ID.
+FamilyDashboard.js	Admin view — displays all family members, their schedules, and health overview.
+Reports.js	Page to view all uploaded medical reports.
+Analytics.js	Displays graphs/charts of medicine adherence over time (weekly/monthly).
+
+
+🔒 Functional Requirements Mapped to UI
+ID	Requirement	Implemented In
+FR1	User Registration/Login	Signup.js, Login.js
+FR2	Family Linking	Signup.js, FamilyDashboard.js
+FR3	Add Medicine	MedicineForm.js
+FR4	Send Notifications	Integrated via Firebase (frontend trigger)
+FR5	Update Medicine Status	ReminderCard.js (buttons for Taken/Missed)
+FR6	Appointment Tracker	AppointmentForm.js
+FR7	Report Upload	ReportUploader.js, Reports.js
+FR8	Dashboard	Dashboard.js
+FR9	Analytics	Analytics.js (charts via Recharts library)
+FR10	Logout	Navbar.js (logout button clears token)
+🔐 Non-Functional Requirements (Frontend Focus)
+
+✅ Security: JWT stored in localStorage + HTTPS backend requests
+✅ Usability: Large buttons, simple fonts, elderly-friendly UI
+✅ Performance: Fast React rendering (load < 2s)
+✅ Scalability: Reusable components and modular folder design
+✅ Maintainability: Each feature isolated in its own file
+
+
+🧠 Recommended Libraries
+Purpose	Library	Reason
+UI Styling	Tailwind CSS	Clean and modern design
+Charts	Recharts	Simple for analytics
+API Calls	Axios	Better error handling
+Forms	React Hook Form	Validation
+Routing	React Router	Navigation
+Notifications	Firebase Cloud Messaging	Free push alerts

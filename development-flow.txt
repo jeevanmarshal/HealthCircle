@@ -1,0 +1,150 @@
+🧱 Development Order (Recommended Flow)
+1️⃣ Auth Pages (Login & Signup)
+
+Start here — they’re the entry point of your app.
+
+Why first?
+
+Needed to access every other page (authentication base).
+
+Easy to test backend integration (login/signup API).
+
+Teaches you how to handle forms, validation, and API calls in React.
+
+You’ll learn:
+
+React form handling (useState, onChange, onSubmit).
+
+Input validation (using your validators.js).
+
+Auth API call via Axios (/auth/login, /auth/signup).
+
+Storing JWT in localStorage.
+
+Redirecting user to dashboard after login.
+
+2️⃣ Navbar + Sidebar (Global Layout)
+
+Build the shell of your app next.
+
+Why now?
+
+Once login works, you need the navigation layout to move between pages.
+
+You’ll reuse this layout for every page.
+
+You’ll learn:
+
+Layout design using Tailwind Grid/Flex.
+
+React Router setup (<Outlet /> for nested routes).
+
+Responsive sidebar (show/hide on mobile).
+
+Logout button logic (clears localStorage).
+
+3️⃣ Dashboard Page
+
+The central overview of your app.
+
+Why third?
+
+Once auth + layout work, dashboard is the perfect test for navigation and data fetching.
+
+You’ll integrate your first chart here (Recharts).
+
+You’ll learn:
+
+Reusable card components (stat boxes).
+
+Fetching dashboard data (medicines count, appointments).
+
+Chart integration with dummy data.
+
+4️⃣ Medicines Page
+
+Core functionality: medicine management.
+
+Why next?
+
+CRUD logic (Create, Read, Update, Delete).
+
+Notification triggers (frontend-only simulation at first).
+
+You’ll learn:
+
+Controlled forms for adding/editing medicine.
+
+Reusable card/list components.
+
+API integration for medicine data.
+
+5️⃣ Appointments Page
+
+Calendar + scheduling view.
+
+Why later?
+
+Similar logic to Medicines — reuse your CRUD and table patterns.
+
+You’ll focus on filtering, sorting, and formatting dates.
+
+You’ll learn:
+
+Filtering and sorting lists.
+
+Date/time inputs in forms.
+
+Visual grouping of appointments.
+
+6️⃣ Reports Page
+
+File upload and view reports.
+
+Why now?
+
+More advanced data (files, images, PDFs).
+
+You’ll practice with backend integration and uploading files (FormData).
+
+You’ll learn:
+
+File input handling in React.
+
+Display uploaded reports as cards or thumbnails.
+
+Delete and view options.
+
+7️⃣ Analytics Page
+
+Visual representation of app insights.
+
+Why last?
+
+You’ll now have real data (medicines, appointments, reports).
+
+Perfect to visualize trends.
+
+You’ll learn:
+
+Combining multiple charts (bar, pie, line).
+
+Working with aggregated API data.
+
+Responsive chart layouts.
+
+8️⃣ Finishing Touches (Final Stage)
+
+The polish pass — what makes your app feel real.
+
+Responsive testing (mobile, tablet, desktop)
+
+UI consistency (colors, spacing)
+
+Toast notifications for success/error
+
+Loading states and skeletons
+
+Animations (Framer Motion optional)
+
+Deployment setup (Vercel or Netlify)
