@@ -1,22 +1,140 @@
-@import "variables";
-@import "mixins";
-@import "global";
+@use '/src/styles/variables' as var;
+@use '/src/styles/mixins' as mix;
 
-$primary-color: #2563eb; // Tailwind blue-600
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
-  background-color: #f9fafb; // Tailwind gray-50
-  color: #333;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
+  // background: linear-gradient(to bottom, var.$g1, var.$g2, var.$g3) no-repeat;
+  @include mix.respond(phone) {
+    font-size: var.$txt-size-1;
+  }
+
+  @include mix.respond(tab-land) {
+    font-size: var.$txt-size-2;
+  }
+
+  @include mix.respond(tab-port) {
+    font-size: var.$txt-size-2;
+  }
+
+  @include mix.respond(big-desktop) {
+    font-size: var.$txt-size-3;
+  }
+}
+
+p{
+  color: var.$txt-color;
+}
+
+a{
+  font-weight: var.$txt-bold;
+}
+
+.gradient-txt {
+  background: linear-gradient(to right, var.$g1, var.$g2, var.$g3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .custom-btn {
-  background-color: $primary-color;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background: linear-gradient(to right,var.$g1, var.$g2, var.$g3);
+  border-radius: var.$btn-radius;
+  border: none;
+  color: var.$txt-color;
+  font-size: var.$txt-size-1;
+  font-weight: var.$txt-bold;
+  padding: 10px 0;
+  margin: 10px auto;
+  cursor: pointer;
+}
 
-  &:hover {
-    background-color: darken($primary-color, 10%);
+.custom-form{
+  width: 50%;
+      @include mix.respond(tab-land){
+    width: 30%;
   }
+    @include mix.respond(tab-port){
+    width: 40%;
+  }
+    @include mix.respond(phone){
+    width: 90%;
+  }
+  border-radius: var.$btn-radius;
+  padding: 10px;
+}
+
+.custom-fields {
+  border: none;
+  width: 100%;
+  padding: 0!important;
+  margin: 5px 0;
+ label{
+  color: var.$txt-color;
+  margin-bottom: 5px;
+ }
+}
+
+.custom-inputs {
+  width: 95%;
+  padding: 8px 10px;
+  font-size: var.$txt-size-2;
+  border: 1px solid var.$border-color;
+  border-radius: var.$btn-radius;
+  background:transparent;
+  color: var.$txt-color;
+  &input:focus{
+    border: 1px solid var.$border-color;
+  }
+}
+
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 5px 0;
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .checkmark {
+    width: 15px;
+    height: 15px;
+    border: 1px solid var.$border-color;
+    border-radius: 4px;
+    margin-right: 8px;
+    position: relative;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  input[type="checkbox"]:checked + .checkmark {
+    background-color: #ec4899;
+    border-color: #ec4899;
+  }
+
+  input[type="checkbox"]:checked + .checkmark::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+
+.custom-hr{
+  margin: 10px;
+  width:100%;
+  background-color: hsla(271, 91%, 65%,.4);
+  border: 1px solid hsla(271, 91%, 65%,.4);
 }
