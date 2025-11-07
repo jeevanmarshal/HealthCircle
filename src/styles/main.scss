@@ -10,7 +10,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  // background: linear-gradient(to bottom, var.$g1, var.$g2, var.$g3) no-repeat;
+
   @include mix.respond(phone) {
     font-size: var.$txt-size-1;
   }
@@ -28,43 +28,47 @@ body {
   }
 }
 
-p{
+p {
   color: var.$txt-color;
 }
 
-a{
+a {
   font-weight: var.$txt-bold;
 }
 
 .gradient-txt {
-  background: linear-gradient(to right, var.$g1, var.$g2, var.$g3);
+  background: linear-gradient(135deg, var.$g1, var.$g2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  // font-size: var.$txt-size-3;
 }
 
 .custom-btn {
-  background: linear-gradient(to right,var.$g1, var.$g2, var.$g3);
+  background: linear-gradient(135deg, var.$g1, var.$g2);
   border-radius: var.$btn-radius;
   border: none;
-  color: var.$txt-color;
-  font-size: var.$txt-size-1;
+  color: var.$white-color;
   font-weight: var.$txt-bold;
   padding: 10px 0;
   margin: 10px auto;
   cursor: pointer;
 }
 
-.custom-form{
+.custom-form {
   width: 50%;
-      @include mix.respond(tab-land){
+
+  @include mix.respond(tab-land) {
     width: 30%;
   }
-    @include mix.respond(tab-port){
+
+  @include mix.respond(tab-port) {
     width: 40%;
   }
-    @include mix.respond(phone){
+
+  @include mix.respond(phone) {
     width: 90%;
   }
+
   border-radius: var.$btn-radius;
   padding: 10px;
 }
@@ -72,12 +76,13 @@ a{
 .custom-fields {
   border: none;
   width: 100%;
-  padding: 0!important;
+  padding: 0 !important;
   margin: 5px 0;
- label{
-  color: var.$txt-color;
-  margin-bottom: 5px;
- }
+
+  label {
+    color: var.$txt-color;
+    margin-bottom: 5px;
+  }
 }
 
 .custom-inputs {
@@ -86,9 +91,10 @@ a{
   font-size: var.$txt-size-2;
   border: 1px solid var.$border-color;
   border-radius: var.$btn-radius;
-  background:transparent;
+  background: transparent;
   color: var.$txt-color;
-  &input:focus{
+
+  &input:focus {
     border: 1px solid var.$border-color;
   }
 }
@@ -99,6 +105,7 @@ a{
   align-items: center;
   cursor: pointer;
   margin: 5px 0;
+
   input[type="checkbox"] {
     display: none;
   }
@@ -113,12 +120,12 @@ a{
     transition: background-color 0.3s, border-color 0.3s;
   }
 
-  input[type="checkbox"]:checked + .checkmark {
+  input[type="checkbox"]:checked+.checkmark {
     background-color: #ec4899;
     border-color: #ec4899;
   }
 
-  input[type="checkbox"]:checked + .checkmark::after {
+  input[type="checkbox"]:checked+.checkmark::after {
     content: "";
     position: absolute;
     left: 5px;
@@ -132,9 +139,17 @@ a{
 }
 
 
-.custom-hr{
+.custom-hr {
   margin: 10px;
-  width:100%;
-  background-color: hsla(271, 91%, 65%,.4);
-  border: 1px solid hsla(271, 91%, 65%,.4);
+  width: 100%;
+  background-color: hsla(271, 91%, 65%, .4);
+  border: 1px solid hsla(271, 91%, 65%, .4);
+}
+
+.custom-img {
+  @include mix.custom-image(top_);
+
+  &-bottom {
+    @include mix.custom-image(bottom_);
+  }
 }

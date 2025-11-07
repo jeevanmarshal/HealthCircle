@@ -1,14 +1,49 @@
-// import './index.css'
+import React, { useState } from 'react';
+import { validateSignup } from '../utilities/validators';
+import { registerUser } from '../api/authApi';
+import  Logo  from '../assets/img/Logo.png';
+import Bottom from "../assets/img/Bottom.png";
 
-function Signup() {
+const Signup = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', password: '', cpassword: '' });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateSignup(formData);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        cpassword: formData.cpassword,
+      }
+      try {
+        const response = registerUser(userData).then(res => console.log(res)).catch((err) => console.log(err));
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full flex flex-col items-center">
+                <img className='custom-img' src={Logo} alt="HealthCircle-img" />
         <h1 className="text-center gradient-txt">
           Sign Up
         </h1>
 
-        <form className="flex flex-col custom-form">
+        <form onSubmit={handleSubmit} className="flex flex-col custom-form">
           {/* Full Name */}
           <fieldset className="custom-fields">
             <label htmlFor="name" className="block text-gray-700">
@@ -18,9 +53,12 @@ function Signup() {
               type="text"
               id="name"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="John Doe"
               className=" custom-inputs w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
             />
+            {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
           </fieldset>
 
           {/* Email */}
@@ -32,9 +70,12 @@ function Signup() {
               type="email"
               id="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="example@gmail.com"
               className="custom-inputs w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none"
             />
+            {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
           </fieldset>
 
           {/* Password */}
@@ -47,8 +88,11 @@ function Signup() {
               id="password"
               name="password"
               placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
               className="custom-inputs w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none"
             />
+            {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
           </fieldset>
 
           {/* Confirm Password */}
@@ -60,9 +104,12 @@ function Signup() {
               type="password"
               id="cpassword"
               name="cpassword"
+              value={formData.cpassword}
+              onChange={handleChange}
               placeholder="••••••••"
               className="custom-inputs w-full border border-gray-300 rounded-lg  focus:ring-2 focus:ring-blue-400 outline-none"
             />
+            {errors.cpassword && <p style={{ color: 'red' }}>{errors.cpassword}</p>}
           </fieldset>
 
           {/* Family Linking */}
@@ -97,6 +144,7 @@ function Signup() {
             </a>
           </p>
         </form>
+                        <img className='custom-img-bottom' src={Bottom} alt="HealthCircle-img" />
       </div>
     </div>
   );

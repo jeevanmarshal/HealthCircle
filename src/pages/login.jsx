@@ -1,12 +1,43 @@
-function Login() {
+import React, { useState } from 'react';
+import { validateLogin } from '../utilities/validators';
+import { loginUser } from '../api/authApi';
+import  Logo  from '../assets/img/Logo.png';
+import Bottom from "../assets/img/Bottom.png";
+
+const Login = () => {
+    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const validationErrors = validateLogin(formData);
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length === 0) {
+            const userData = {
+                email: formData.email,
+                password: formData.password,
+            }
+            const response = loginUser(userData).then(res => console.log(res)).catch(err => console.log(err));
+        }
+    };
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="w-full flex flex-col items-center">
+                <img className='custom-img' src={Logo} alt="HealthCircle-img" />
                 <h1 className="text-center gradient-txt">
                     Login
                 </h1>
 
-                <form className="flex flex-col custom-form">
+                <form onSubmit={handleSubmit} className="flex flex-col custom-form">
 
                     {/* Email */}
                     <fieldset className="custom-fields">
@@ -17,9 +48,12 @@ function Login() {
                             type="email"
                             id="email"
                             name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             placeholder="example@gmail.com"
                             className="custom-inputs w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none"
                         />
+                        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                     </fieldset>
 
                     {/* Password */}
@@ -32,8 +66,11 @@ function Login() {
                             id="password"
                             name="password"
                             placeholder="••••••••"
+                            value={formData.password}
+                            onChange={handleChange}
                             className="custom-inputs w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none"
                         />
+                        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                     </fieldset>
                     <fieldset className="custom-fields flex justify-between items-center">
                         <label className="custom-checkbox">
@@ -60,6 +97,7 @@ function Login() {
                         </a>]
                     </p>
                 </form>
+                <img className='custom-img-bottom' src={Bottom} alt="HealthCircle-img" />
             </div>
         </div>
     );
