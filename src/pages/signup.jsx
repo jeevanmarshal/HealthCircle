@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { validateSignup } from '../utilities/validators';
 import { registerUser } from '../api/authApi';
-import  Logo  from '../assets/img/Logo.png';
+import Logo from '../assets/img/Logo.png';
 import Bottom from "../assets/img/Bottom.png";
 
 const Signup = () => {
@@ -36,17 +36,16 @@ const Signup = () => {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full flex flex-col items-center">
-                <img className='custom-img' src={Logo} alt="HealthCircle-img" />
-        <h1 className="text-center gradient-txt">
+    <div className='w-[100%] justify-center flex flex-col items-center'>
+        <img className="w-[90%] lg:w-[35%] md:w-[50%] mt-6 rounded-t-lg" src={Logo} alt="HealthCircle-img" />
+        <h1 className="gradient-txt font-bold my-3 text-4xl lg:text-3xl md:text-3xl sm:text-2xl text-center">
           Sign Up
         </h1>
 
-        <form onSubmit={handleSubmit} className="flex flex-col custom-form">
+        <form onSubmit={handleSubmit} className="p-3 w-[90%] lg:w-[35%] md:w-[50%]">
           {/* Full Name */}
-          <fieldset className="custom-fields">
-            <label htmlFor="name" className="block text-gray-700">
+          <fieldset className="my-3">
+            <label className='block' htmlFor="name">
               Full Name
             </label>
             <input
@@ -56,14 +55,14 @@ const Signup = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="John Doe"
-              className=" custom-inputs w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+              className=" custom-inputs w-[100%] my-2 p-2"
             />
             {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
           </fieldset>
 
           {/* Email */}
-          <fieldset className="custom-fields">
-            <label htmlFor="email" className="block text-gray-700 ">
+          <fieldset className="my-3">
+            <label className='block' htmlFor="email">
               Email Address
             </label>
             <input
@@ -73,14 +72,14 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="example@gmail.com"
-              className="custom-inputs w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none"
+              className="custom-inputs w-[100%] my-2 p-2"
             />
             {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
           </fieldset>
 
           {/* Password */}
-          <fieldset className="custom-fields">
-            <label htmlFor="password" className="block text-gray-700 mb-1">
+          <fieldset className="my-3">
+            <label className='block' htmlFor="password">
               Password
             </label>
             <input
@@ -90,14 +89,14 @@ const Signup = () => {
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}
-              className="custom-inputs w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none"
+              className="custom-inputs w-[100%] my-2 p-2"
             />
             {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
           </fieldset>
 
           {/* Confirm Password */}
-          <fieldset className="custom-fields">
-            <label htmlFor="cpassword" className="block text-gray-700 mb-1">
+          <fieldset className="my-3">
+            <label className='block' htmlFor="cpassword">
               Confirm Password
             </label>
             <input
@@ -107,20 +106,20 @@ const Signup = () => {
               value={formData.cpassword}
               onChange={handleChange}
               placeholder="••••••••"
-              className="custom-inputs w-full border border-gray-300 rounded-lg  focus:ring-2 focus:ring-blue-400 outline-none"
+              className="custom-inputs w-[100%] my-2 p-2"
             />
             {errors.cpassword && <p style={{ color: 'red' }}>{errors.cpassword}</p>}
           </fieldset>
 
           {/* Family Linking */}
-          <fieldset className="custom-fields flex flex-col">
-            <label className="block text-gray-700 ">Family Linking :</label>
-            <label className="custom-checkbox">
+          <fieldset className="my-3">
+            <label className='block mb-1'>Family Linking :</label>
+            <label className="custom-checkbox flex gap-2 items-center">
               <input type="checkbox" />
               <span className="checkmark"></span>
               Join existing family
             </label>
-            <label className="custom-checkbox">
+            <label className="custom-checkbox flex gap-2 items-center">
               <input type="checkbox" />
               <span className="checkmark"></span>
               Create new family
@@ -130,23 +129,22 @@ const Signup = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="custom-btn w-full bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200"
+            className="custom-btn w-[100%] p-2 pointer my-2"
           >
             Create Account
           </button>
 
-          <hr className="custom-hr" />
+          <hr className="custom-hr my-2" />
 
-          <p className="text-center text-gray-600 text-sm mt-1">
+          <p className='text-center my-1'>
             Already have an account?{" "}
-            <a href="#">
+            <a href="#" className='underline'>
               Login instead
             </a>
           </p>
         </form>
-                        <img className='custom-img-bottom' src={Bottom} alt="HealthCircle-img" />
+        <img className='w-[90%] lg:w-[35%] md:w-[50%] rounded-b-lg' src={Bottom} alt="HealthCircle-img" />
       </div>
-    </div>
   );
 }
 

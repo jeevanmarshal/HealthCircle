@@ -9,7 +9,7 @@ import Footer from './components/Footer'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Signup />
+    <Login />
     <Footer />
   </StrictMode>
 )

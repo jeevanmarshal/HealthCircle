@@ -8,11 +8,9 @@
   font-style: normal;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-
-  @include mix.respond(phone) {
-    font-size: var.$txt-size-1;
+html{
+  @include mix.respond(big-desktop) {
+    font-size: var.$txt-size-3;
   }
 
   @include mix.respond(tab-land) {
@@ -23,9 +21,13 @@ body {
     font-size: var.$txt-size-2;
   }
 
-  @include mix.respond(big-desktop) {
-    font-size: var.$txt-size-3;
+  @include mix.respond(phone) {
+    font-size: var.$txt-size-1;
   }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
 }
 
 p {
@@ -34,64 +36,36 @@ p {
 
 a {
   font-weight: var.$txt-bold;
+  color: var.$txt-color;
 }
 
 .gradient-txt {
   background: linear-gradient(135deg, var.$g1, var.$g2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  // font-size: var.$txt-size-3;
 }
 
 .custom-btn {
   background: linear-gradient(135deg, var.$g1, var.$g2);
   border-radius: var.$btn-radius;
-  border: none;
   color: var.$white-color;
   font-weight: var.$txt-bold;
-  padding: 10px 0;
-  margin: 10px auto;
-  cursor: pointer;
 }
 
 .custom-form {
-  width: 50%;
-
-  @include mix.respond(tab-land) {
-    width: 30%;
-  }
-
-  @include mix.respond(tab-port) {
-    width: 40%;
-  }
-
-  @include mix.respond(phone) {
-    width: 90%;
-  }
-
   border-radius: var.$btn-radius;
-  padding: 10px;
 }
 
 .custom-fields {
-  border: none;
-  width: 100%;
-  padding: 0 !important;
-  margin: 5px 0;
-
   label {
     color: var.$txt-color;
-    margin-bottom: 5px;
   }
 }
 
 .custom-inputs {
-  width: 95%;
-  padding: 8px 10px;
   font-size: var.$txt-size-2;
   border: 1px solid var.$border-color;
   border-radius: var.$btn-radius;
-  background: transparent;
   color: var.$txt-color;
 
   &input:focus {
@@ -101,11 +75,6 @@ a {
 
 
 .custom-checkbox {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin: 5px 0;
-
   input[type="checkbox"] {
     display: none;
   }
@@ -140,16 +109,6 @@ a {
 
 
 .custom-hr {
-  margin: 10px;
-  width: 100%;
   background-color: hsla(271, 91%, 65%, .4);
   border: 1px solid hsla(271, 91%, 65%, .4);
-}
-
-.custom-img {
-  @include mix.custom-image(top_);
-
-  &-bottom {
-    @include mix.custom-image(bottom_);
-  }
 }

@@ -33,29 +33,3 @@
     //1800
   }
 }
-
-@mixin custom-image($position) {
-  width: 50%;
-
-  @include respond(tab-land) {
-    width: 30%;
-  }
-
-  @include respond(tab-port) {
-    width: 40%;
-  }
-
-  @include respond(phone) {
-    width: 90%;
-  }
-
-  @if $position ==top_ {
-    border-top-left-radius: var.$btn-radius;
-    border-top-right-radius: var.$btn-radius;
-  }
-
-  @if $position ==bottom_ {
-    border-bottom-left-radius: var.$btn-radius;
-    border-bottom-right-radius: var.$btn-radius;
-  }
-}
