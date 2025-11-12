@@ -8,7 +8,7 @@
   font-style: normal;
 }
 
-html{
+html {
   @include mix.respond(big-desktop) {
     font-size: var.$txt-size-3;
   }
@@ -40,13 +40,13 @@ a {
 }
 
 .gradient-txt {
-  background: linear-gradient(135deg, var.$g1, var.$g2);
+  background: linear-gradient(-135deg, var.$g1, var.$g2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .custom-btn {
-  background: linear-gradient(135deg, var.$g1, var.$g2);
+  background: linear-gradient(-135deg, var.$g1, var.$g2);
   border-radius: var.$btn-radius;
   color: var.$white-color;
   font-weight: var.$txt-bold;
@@ -110,5 +110,15 @@ a {
 
 .custom-hr {
   background-color: hsla(271, 91%, 65%, .4);
-  border: 1px solid hsla(271, 91%, 65%, .4);
+  border: 1px solid hsla(271, 71%, 84%, 0.4);
+}
+
+.bg-accent{
+  background-color: var.$accent;
+  box-shadow: 0 6px 20px hsla(0, 0%, 0%, .15);
+  transition: all .5s ease;
+}
+
+.bg-accent-light{
+  background-color: var.$accent-light;
 }
