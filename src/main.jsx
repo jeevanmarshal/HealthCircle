@@ -7,13 +7,11 @@ import Login from './pages/login'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Dashboard from './pages/Dashboard'
+import App from './App'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Navbar />
-    < Sidebar />
-    {/* <Login /> */}
-    {/* <Signup /> */}
-    <Footer />
+    <App />
   </StrictMode>
 )
