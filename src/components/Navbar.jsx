@@ -1,6 +1,4 @@
 import { useState } from "react";
-
-import Sidebar from "./Sidebar";
 import Icon from '../assets/img/Icon.png';
 import User from '../assets/img/user.png';
 
@@ -8,7 +6,7 @@ export default function Navbar() {
     const [open, setOpen] = useState(false);
     return (
         <>
-            <div className="w-[100%] fixed flex justify-between px-5 py-1 bg-accent box-shadow">
+            <div className="w-[100%] fixed flex justify-between z-10 px-5 py-1 bg-accent box-shadow">
                 <div className="flex gap-2 items-center">
                     <img src={Icon} alt="Health-Circle-Logo" className="hidden lg:flex md:flex size-[60px] lg:size-[70px] md:size-[60px]" />
                     <h1 className="gradient-txt hidden text-4xl lg:text-3xl md:text-3xl font-bold lg:flex md:flex">Health Circle</h1>
@@ -42,8 +40,7 @@ export default function Navbar() {
                 {/* Mobile Menu */}
                 <div
                     className={`absolute top-12 left-0 w-[65%] h-100vh bg-accent flex flex-col gap-5 py-6 px-2 transition-transform rounded-md duration-500 
-          ${open ? "translate-x-0" : "-translate-x-full"}`}
-                >
+          ${open ? "translate-x-0" : "-translate-x-full"}`}>
                     <div className="flex gap-2 items-center">
                         <img src={Icon} alt="Health-Circle-Logo" className="flex size-[50px]" />
                         <h1 className="gradient-txt text-xl font-bold">Health Circle</h1>
@@ -60,6 +57,6 @@ export default function Navbar() {
                     <span><a href="#">Profile</a></span>
                 </div>
             </div >
-        </>
+    </>
     );
 }
