@@ -39,6 +39,11 @@ a {
   color: var.$txt-color;
 }
 
+.border-dash{
+  border:2px solid lightgray;
+  border-style: dashed;
+}
+
 .gradient-txt {
   background: linear-gradient(-135deg, var.$g1, var.$g2);
   -webkit-background-clip: text;

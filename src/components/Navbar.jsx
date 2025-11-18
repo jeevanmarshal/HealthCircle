@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Icon from '../assets/img/Icon.png';
 import User from '../assets/img/user.png';
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const closeSidebar = () => setOpen(false);
     return (
         <>
             <div className="w-[100%] fixed flex justify-between z-10 px-5 py-1 bg-accent box-shadow">
@@ -39,17 +41,32 @@ export default function Navbar() {
                 </div>
                 {/* Mobile Menu */}
                 <div
-                    className={`absolute top-12 left-0 w-[65%] h-100vh bg-accent flex flex-col gap-5 py-6 px-2 transition-transform rounded-md duration-500 
+                    className={`absolute top-12 left-0 w-[65%] h-100vh bg-accent flex flex-col gap-5 py-6 px-2 transition-transform rounded-md duration-500
           ${open ? "translate-x-0" : "-translate-x-full"}`}>
                     <div className="flex gap-2 items-center">
                         <img src={Icon} alt="Health-Circle-Logo" className="flex size-[50px]" />
                         <h1 className="gradient-txt text-xl font-bold">Health Circle</h1>
                     </div>
-                    <a className="w-full p-2 flex text-gray items-center h-[40px]" href="#"><span className="mr-2">📊</span> Dashboard</a>
-                    <a className="w-full p-2 flex text-gray items-center h-[40px]" href="#"><span className="mr-2">💊</span> Medicine Management</a>
-                    <a className="w-full p-2 flex text-gray items-center h-[40px]" href="#"><span className="mr-2">📅</span> Appointments</a>
-                    <a className="w-full p-2 flex text-gray items-center h-[40px]" href="#"><span className="mr-2">📁</span> Reports</a>
-                    <a className="w-full p-2 flex text-gray items-center h-[40px]" href="#"><span className="mr-2">📈</span> Analytics</a>
+                    <NavLink onClick={closeSidebar} to="/" className={({ isActive }) =>
+                        `w-full p-2 flex text-gray items-center h-[40px] 
+     ${isActive ? "bg-pink-400 text-white" : ""}`
+                    }><span className="mr-2">📊</span> Dashboard</NavLink>
+                    <NavLink onClick={closeSidebar} to="/medicines" className={({ isActive }) =>
+                        `w-full p-2 flex text-gray items-center h-[40px] 
+     ${isActive ? "bg-pink-400 text-white" : ""}`
+                    } ><span className="mr-2">💊</span> Medicine Management</NavLink>
+                    <NavLink onClick={closeSidebar} to="/appointments" className={({ isActive }) =>
+                        `w-full p-2 flex text-gray items-center h-[40px] 
+     ${isActive ? "bg-pink-400 text-white" : ""}`
+                    } ><span className="mr-2">📅</span> Appointments</NavLink>
+                    <NavLink onClick={closeSidebar} to="/reports" className={({ isActive }) =>
+                        `w-full p-2 flex text-gray items-center h-[40px] 
+     ${isActive ? "bg-pink-400 text-white" : ""}`
+                    } ><span className="mr-2">📁</span> Reports</NavLink>
+                    <NavLink onClick={closeSidebar} to="/analytics" className={({ isActive }) =>
+                        `w-full p-2 flex text-gray items-center h-[40px] 
+     ${isActive ? "bg-pink-400 text-white" : ""}`
+                    } ><span className="mr-2">📈</span> Analytics</NavLink>
                 </div>
 
                 <div className="flex gap-2 items-center">
@@ -57,6 +74,6 @@ export default function Navbar() {
                     <span><a href="#">Profile</a></span>
                 </div>
             </div >
-    </>
+        </>
     );
 }

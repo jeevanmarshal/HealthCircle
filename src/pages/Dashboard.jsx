@@ -6,7 +6,7 @@ import ShortcutButtons from '../components/dasboard/ShortcutButtons';
 export default function Dashboard() {
     return (
         <>
-            <div className="w-[100%] lg:w-[75%] md:w-[70%] h-full p-3 flex lg:flex md:flex flex-col justify-center gap-2 text-sm lg:text-[16px] md:text-md">
+            <div className="w-[100%] h-full p-3 flex lg:flex md:flex flex-col justify-center gap-2 text-sm lg:text-[16px] md:text-md">
                 <HeaderGreeting />
                 <StatsCards />
                 <ReminderList />
