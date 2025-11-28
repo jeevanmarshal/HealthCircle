@@ -1,8 +1,9 @@
-export default function Table({appointments}) {
-    return (
-        <>
-            <div className="bg-white rounded-lg shadow overflow-x-auto">
+import React from 'react'
 
+function Appointments({appointments}) {
+  return (
+      <div className="bg-white rounded-lg shadow overflow-x-auto">
+        <h1 className='text-center'>Appointments</h1>
                 <table className="w-full border-collapse">
                     <thead>
                         <tr className="bg-pink-100 text-center">
@@ -39,6 +40,7 @@ export default function Table({appointments}) {
                 </table>
             </div>
 
-        </>
-    )
+  )
 }
+
+export default Appointments

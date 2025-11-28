@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from '../components/AppointmentTracker/Header';
 import Table from '../components/AppointmentTracker/Table';
 import Modal from '../components/AppointmentTracker/Modal';
+// import Appointment from '../components/AppointmentTracker/Appointments'
 export default function AppointmentTracker() {
     const [appointments, setAppointments] = useState([
         {
@@ -36,10 +37,10 @@ export default function AppointmentTracker() {
     };
 
     return (
-        <div className="mt-8 w-[100%] h-full p-3 flex lg:flex md:flex flex-col gap-2 text-sm lg:text-[16px] md:text-md">
-            <Header setModalOpen={setModalOpen} />
+        <div className="mt-8 w-[100%] p-3 flex lg:flex md:flex flex-col gap-2 text-sm lg:text-[16px] md:text-md">
+            <Header setModalOpen={setModalOpen} modalOpen={modalOpen} />
             <Table appointments={appointments} />
-            <Modal addAppointment={addAppointment} formData={formData} handleChange={handleChange} setModalOpen={setModalOpen} />
+            <Modal addAppointment={addAppointment} formData={formData} handleChange={handleChange} setModalOpen={setModalOpen } modalOpen={modalOpen} />
         </div>
     );
 }

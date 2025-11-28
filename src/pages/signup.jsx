@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { validateSignup } from '../utilities/validators';
-import { registerUser } from '../api/authApi';
+import { registerUser } from '../services/authService';
 import Logo from '../assets/img/Logo.png';
 import Bottom from "../assets/img/Bottom.png";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Footer from '../components/Footer'
 
 const Signup = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', password: '', cpassword: '' });
   const [errors, setErrors] = useState({});
 
@@ -28,7 +33,11 @@ const Signup = () => {
         cpassword: formData.cpassword,
       }
       try {
-        const response = registerUser(userData).then(res => console.log(res)).catch((err) => console.log(err));
+        registerUser(userData).then(res => {
+          login(res.data.token);
+          navigate('/')
+        }).catch((err) => console.log(err));
+
       }
       catch (err) {
         console.log(err)
@@ -36,6 +45,7 @@ const Signup = () => {
     }
   };
   return (
+    <>
     <div className='w-[100%] justify-center flex flex-col items-center'>
       <img className="w-[90%] lg:w-[35%] md:w-[50%] mt-6 rounded-t-lg" src={Logo} alt="HealthCircle-img" />
       <h1 className="gradient-txt font-bold my-2 text-4xl lg:text-3xl md:text-3xl sm:text-2xl text-center">
@@ -138,13 +148,15 @@ const Signup = () => {
 
         <p className='text-center my-1'>
           Already have an account?{" "}
-          <a href="#" className='underline'>
+          <NavLink to="/login" className='underline'>
             Login instead
-          </a>
+          </NavLink>
         </p>
       </form>
       <img className='w-[90%] lg:w-[35%] md:w-[50%] rounded-b-lg' src={Bottom} alt="HealthCircle-img" />
     </div>
+    <Footer/>
+    </>
   );
 }
 

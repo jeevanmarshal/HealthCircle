@@ -3,8 +3,8 @@ export default function Modal({ addAppointment, formData, handleChange, setModal
         <>
             {modalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg w-96 shadow-xl">
-                        <h2 className="text-xl font-semibold mb-4">📘 Add Appointment</h2>
+                    <div className="bg-white p-4 mt-12 rounded-lg w-96 shadow-xl">
+                        <h2 className="text-xl font-semibold mb-4"><span className="mr-1">📘</span> Add Appointment</h2>
 
                         <div className="space-y-3">
                             <input
@@ -64,7 +64,7 @@ export default function Modal({ addAppointment, formData, handleChange, setModal
                                 onClick={addAppointment}
                                 className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                             >
-                                Save Appointment
+                                Save
                             </button>
                         </div>
                     </div>
