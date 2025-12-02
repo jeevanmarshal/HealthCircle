@@ -2,7 +2,9 @@ import { useState } from "react";
 import Header from '../components/Reports/Header'
 import Upload from '../components/Reports/Upload'
 import Report from '../components/Reports/Report'
+
 const Reports = () => {
+
     const [reports, setReports] = useState([
         {
             id: 1,
@@ -33,6 +35,7 @@ const Reports = () => {
 
         setReports([...reports, newReport]);
         setFile(null);
+        console.log(reports)
     };
 
     return (

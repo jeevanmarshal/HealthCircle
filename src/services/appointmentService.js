@@ -1,4 +1,4 @@
-import { API } from "../api";
+import  API  from "../api/axiosConfig";
 
 export const getAppointments = () => API.get("/appointments");
 export const addAppointment = (data) => API.post("/appointments", data);

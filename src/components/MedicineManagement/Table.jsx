@@ -1,85 +1,63 @@
-import { useState, useEffect } from "react";
-import Modal from './Modal'
-export default function Table({ medicine, getMedicines, updateMedicine, deleteMedicine, fetchMedicines, setShowModal }) {
-    const [Data, setData] = useState({
-        id: '',
-        name: '',
-        dosage: '',
-        time: '',
-        days: ''
-    })
-    //display medicines
-    // fetchMedicines();
+export default function Table({
+  medicines,
+  setSelectedData,
+  setEditModal,
+  deleteMedicine,
+  fetchMedicines,
+}) {
+  const handleEdit = (row) => {
+    setSelectedData(row);
+    setEditModal(true);
+  };
 
-    // edit row
-    //update medicines
-
-    const handleEdit = async (m) => {
-        setShowModal(true)  
-        try{
-        await updateMedicine(m.id, Data)
-        }catch(error){
-            console.log(error)
-        }
-        setData({
-            id: m.id,
-            name: m.name,
-            dosage: m.dosage,
-            time: m.time,
-            days: m.days
-
-        })
-
-
+  const handleDelete = async (id) => {
+    try {
+      await deleteMedicine(id);
+      fetchMedicines();
+    } catch {
+      console.log("Delete failed");
     }
-
-    //delete medicines
-    const handleDelete = async (id) => {
-        try {
-            await deleteMedicine(id);
-            console.log(id)
-        }
-        catch (error) {
-            console.log(error, id)
-        }
-    }
+  };
 
 
+    if (!medicines || medicines.length === 0) {
     return (
-        <div className="bg-white rounded-lg shadow overflow-x-auto">
-            <table className="w-full border-collapse">
-                <thead>
-                    <tr className="bg-pink-100 text-center">
-                        <th className="p-3 border">No</th>
-                        <th className="p-3 border">Medicine Name</th>
-                        <th className="p-3 border">Dosage</th>
-                        <th className="p-3 border">Time</th>
-                        <th className="p-3 border">Days</th>
-                        <th className="p-3 border">Actions</th>
-                    </tr>
-                </thead>
-                <tbody className="text-center">
-                    {medicine.map((m) => (
-                        <tr key={m.id} className="hover:bg-pink-50">
-                            <td className="p-3 border">{m.id}</td>
-                            <td className="p-3 border">{m.name}</td>
-                            <td className="p-3 border">{m.dosage}</td>
-                            <td className="p-3 border">{m.time}</td>
-                            <td className="p-3 border">{m.days}</td>
-                            <td className="p-3 border flex">
-                                <button className="w-[50%] mr-5" onClick={() => handleEdit(m)}>
-                                    ✏️
-                                </button>
-                                <button className="w-[50%]" onClick={() => handleDelete(m.id)}>
-                                    🗑️
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+      <div className="bg-white rounded-lg shadow p-6 text-center text-gray-500">
+        No medicines found
+      </div>
+    );
+  }
 
-            <Modal Data={Data} />
-        </div>
-    )
+  return (
+    <div className="bg-white rounded-lg shadow overflow-x-auto">
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="bg-pink-100 text-center">
+            <th className="p-3 border">No</th>
+            <th className="p-3 border">Medicine</th>
+            <th className="p-3 border">Dosage</th>
+            <th className="p-3 border">Time</th>
+            <th className="p-3 border">Days</th>
+            <th className="p-3 border">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody className="text-center">
+          {medicines.map((m, index) => (
+            <tr key={m.id} className="hover:bg-pink-50">
+              <td className="p-3 border">{index + 1}</td>
+              <td className="p-3 border">{m.name}</td>
+              <td className="p-3 border">{m.dosage}</td>
+              <td className="p-3 border">{m.time}</td>
+              <td className="p-3 border">{m.days}</td>
+              <td className="p-3 border flex justify-center gap-3">
+                <button onClick={() => handleEdit(m)}>✏️</button>
+                <button onClick={() => handleDelete(m.id)}>🗑️</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }

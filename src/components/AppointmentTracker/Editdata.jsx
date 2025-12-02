@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Modal({ modalOpen, setModalOpen, addAppointment }) {
+export default function Editdata({ editModal, setEditmodal, selectedAppointment, updateAppointment }) {
   const [form, setForm] = useState({
     doctor: "",
     date: "",
@@ -9,20 +9,35 @@ export default function Modal({ modalOpen, setModalOpen, addAppointment }) {
     notes: "",
   });
 
-  const handleChange = (e) =>
-    setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
+  useEffect(() => {
+    if (selectedAppointment) {
+      setForm({
+        doctor: selectedAppointment.doctor || "",
+        date: selectedAppointment.date || "",
+        time: selectedAppointment.time || "",
+        hospital: selectedAppointment.hospital || "",
+        notes: selectedAppointment.notes || "",
+      });
+    }
+  }, [selectedAppointment]);
 
-  const handleSave = async () => {
-    await addAppointment(form);
-    setForm({ doctor: "", date: "", time: "", hospital: "", notes: "" });
+  const handleChange = (e) => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (!selectedAppointment?.id) {
+      setEditmodal(false);
+      return;
+    }
+    await updateAppointment(selectedAppointment.id, form);
   };
 
-  if (!modalOpen) return null;
+  if (!editModal) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
       <div className="bg-white p-4 mt-12 rounded-lg w-96 shadow-xl">
-        <h2 className="text-xl font-semibold mb-4">📘 Add Appointment</h2>
+        <h2 className="text-xl font-semibold mb-4">📘 Edit Appointment</h2>
 
         <div className="space-y-3">
           <input name="doctor" value={form.doctor} onChange={handleChange} className="w-full border p-2 rounded" placeholder="Doctor Name" />
@@ -33,7 +48,7 @@ export default function Modal({ modalOpen, setModalOpen, addAppointment }) {
         </div>
 
         <div className="flex justify-end gap-3 mt-4">
-          <button onClick={() => setModalOpen(false)} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+          <button onClick={() => setEditmodal(false)} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
           <button onClick={handleSave} className="px-4 py-2 bg-green-600 text-white rounded">Save</button>
         </div>
       </div>

@@ -1,6 +1,7 @@
+import Modal from './Modal';
+
 export default function Header({setShowModal}) {
-    return (
-        <div className="flex items-center justify-between mb-6">
+    return (<>        <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold flex items-center gap-2">
                 💊 Your Medicine Schedule
             </h2>
@@ -11,6 +12,7 @@ export default function Header({setShowModal}) {
                 + Add Medicine
             </button>
         </div>
-
+        <Modal/>
+</>
     )
 }
