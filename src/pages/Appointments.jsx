@@ -16,7 +16,7 @@ import {
 export default function AppointmentTracker() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState([{ doctor: "ravi", date: "dfknl", time: "3.00 AM", hospital: "appo", notes: "" }]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   // UI states
@@ -29,8 +29,11 @@ export default function AppointmentTracker() {
 
   const showAlert = (type, message) => {
     setAlert({ type, message });
-    setTimeout(() => setAlert({ type: "", message: "" }), 2500);
+    setTimeout(() => {
+      setAlert({ type: "", message: "" });
+    }, 2500); // must match toast duration
   };
+
 
   const fetchAppointments = async () => {
     setLoading(true);
@@ -45,6 +48,8 @@ export default function AppointmentTracker() {
   };
 
   return (
+
+
     <div className="mt-8 w-full p-3 flex flex-col gap-2 text-sm lg:text-[16px] md:text-md">
       {loading && <Loader />}
       <Alert type={alert.type} message={alert.message} />
@@ -75,11 +80,11 @@ export default function AppointmentTracker() {
         setModalOpen={setModalOpen}
         addAppointment={async (data) => {
           setLoading(true);
+          setModalOpen(false);
           try {
             await addAppointment(data);
             showAlert("success", "Appointment added");
             await fetchAppointments();
-            setModalOpen(false);
           } catch (err) {
             showAlert("error", "Failed to add appointment");
           } finally {
@@ -94,14 +99,14 @@ export default function AppointmentTracker() {
         selectedAppointment={selectedAppointment}
         updateAppointment={async (id, data) => {
           setLoading(true);
+          setEditModal(false);
           try {
             await updateAppointment(id, data);
             showAlert("success", "Appointment updated");
             await fetchAppointments();
-            setEditModal(false);
+
           } catch (err) {
             showAlert("error", "Update failed");
-            setEditModal(false);
           } finally {
             setLoading(false);
           }

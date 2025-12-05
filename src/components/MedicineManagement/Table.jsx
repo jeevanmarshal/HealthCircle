@@ -1,63 +1,123 @@
+import { useState } from "react";
+import Editmodal from "./Editmodal";
+import DeleteModal from "../DeleteModal";
+
 export default function Table({
-  medicines,
-  setSelectedData,
-  setEditModal,
-  deleteMedicine,
-  fetchMedicines,
+    medicines,
+    getMedicines,
+    deleteMedicine,
+    fetchMedicines,
+    setEditModal,
+    EditModal
 }) {
-  const handleEdit = (row) => {
-    setSelectedData(row);
-    setEditModal(true);
-  };
+    const [preData, setPreData] = useState({
+        name: "",
+        dosage: "",
+        time: "",
+        days: "",
+    });
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteMedicine(id);
-      fetchMedicines();
-    } catch {
-      console.log("Delete failed");
-    }
-  };
+    // DELETE MODAL STATE
+    const [deleteModal, setDeleteModal] = useState({
+        open: false,
+        id: null,
+    });
 
+    // open delete confirmation modal
+    const askDelete = (id) => {
+        setDeleteModal({ open: true, id });
+    };
 
-    if (!medicines || medicines.length === 0) {
+    // CONFIRM DELETE
+    const confirmDelete = async () => {
+        try {
+            await deleteMedicine(deleteModal.id);
+        } catch (error) {
+            console.log(error);
+        }
+        setDeleteModal({ open: false, id: null });
+    };
+
+    // CANCEL DELETE
+    const cancelDelete = () => {
+        setDeleteModal({ open: false, id: null });
+    };
+
+    // EDIT
+    const handleEdit = (id) => {
+        medicines.forEach((m) => {
+            if (m.id == id) {
+                setPreData({
+                    name: m.name,
+                    dosage: m.dosage,
+                    time: m.time,
+                    days: m.days,
+                });
+            }
+        });
+
+        setEditModal(true);
+    };
+
     return (
-      <div className="bg-white rounded-lg shadow p-6 text-center text-gray-500">
-        No medicines found
-      </div>
+        <div className="bg-white rounded-lg shadow overflow-x-auto">
+            <table className="w-full border-collapse">
+                <thead>
+                    <tr className="bg-pink-100 text-center">
+                        <th className="p-3 border">No</th>
+                        <th className="p-3 border">Medicine Name</th>
+                        <th className="p-3 border">Dosage</th>
+                        <th className="p-3 border">Time</th>
+                        <th className="p-3 border">Days</th>
+                        <th className="p-3 border">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody className="text-center">
+                    {medicines.map((m) => (
+                        <tr key={m.id} className="hover:bg-pink-50">
+                            <td className="p-3 border">{m.id}</td>
+                            <td className="p-3 border">{m.name}</td>
+                            <td className="p-3 border">{m.dosage}</td>
+                            <td className="p-3 border">{m.time}</td>
+                            <td className="p-3 border">{m.days}</td>
+
+                            <td className="p-3 border flex">
+                                <button
+                                    className="w-[50%] mr-5"
+                                    onClick={() => handleEdit(m.id)}
+                                >
+                                    ✏️
+                                </button>
+
+                                <button
+                                    className="w-[50%]"
+                                    onClick={() => askDelete(m.id)}
+                                >
+                                    🗑️
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {/* Delete Confirmation Modal */}
+            <DeleteModal
+                open={deleteModal.open}
+                title="Delete Medicine?"
+                message="Are you sure you want to delete this medicine?"
+                onConfirm={confirmDelete}
+                onCancel={cancelDelete}
+            />
+
+            <Editmodal
+                fetchMedicines={fetchMedicines}
+                setEditModal={setEditModal}
+                preData={preData}
+                EditModal={EditModal}
+                medicines={medicines}
+            />
+        </div>
     );
-  }
-
-  return (
-    <div className="bg-white rounded-lg shadow overflow-x-auto">
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-pink-100 text-center">
-            <th className="p-3 border">No</th>
-            <th className="p-3 border">Medicine</th>
-            <th className="p-3 border">Dosage</th>
-            <th className="p-3 border">Time</th>
-            <th className="p-3 border">Days</th>
-            <th className="p-3 border">Actions</th>
-          </tr>
-        </thead>
-
-        <tbody className="text-center">
-          {medicines.map((m, index) => (
-            <tr key={m.id} className="hover:bg-pink-50">
-              <td className="p-3 border">{index + 1}</td>
-              <td className="p-3 border">{m.name}</td>
-              <td className="p-3 border">{m.dosage}</td>
-              <td className="p-3 border">{m.time}</td>
-              <td className="p-3 border">{m.days}</td>
-              <td className="p-3 border flex justify-center gap-3">
-                <button onClick={() => handleEdit(m)}>✏️</button>
-                <button onClick={() => handleDelete(m.id)}>🗑️</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
 }

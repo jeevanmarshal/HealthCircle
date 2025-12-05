@@ -1,3 +1,6 @@
+import React, {useState} from "react";
+import DeleteModal from "../DeleteModal";
+
 export default function Table({
   appointments = [],
   setSelectedAppointment,
@@ -8,6 +11,26 @@ export default function Table({
   const handleEdit = (appt) => {
     setSelectedAppointment(appt);
     setEditmodal(true);
+  };
+  const [deleteModal, setDeleteModal] = useState({
+    open: false,
+    id: null,
+  });
+  const askDelete = (id) => {
+    setDeleteModal({ open: true, id });
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await deleteMedicine(deleteModal.id);
+    } catch (error) {
+      console.log(error);
+    }
+    setDeleteModal({ open: false, id: null });
+  };
+
+  const cancelDelete = () => {
+    setDeleteModal({ open: false, id: null });
   };
 
   const handleDelete = async (id) => {
@@ -51,13 +74,13 @@ export default function Table({
                 <div className="flex justify-center gap-2">
                   <button
                     onClick={() => handleEdit(a)}
-                    className="px-3 py-1 rounded bg-yellow-100"
+                    className="mr-4 rounded"
                   >
                     ✏️
                   </button>
                   <button
-                    onClick={() => handleDelete(a.id)}
-                    className="px-3 py-1 rounded bg-red-100"
+                    onClick={() => askDelete(a.id)}
+                    className="px-3 py-1 rounded"
                   >
                     🗑️
                   </button>
@@ -67,6 +90,13 @@ export default function Table({
           ))}
         </tbody>
       </table>
+      <DeleteModal
+        open={deleteModal.open}
+        title="Delete Appointment?"
+        message="Are you sure you want to delete this Appointment?"
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
     </div>
   );
 }

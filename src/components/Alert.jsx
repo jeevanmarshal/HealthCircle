@@ -9,7 +9,7 @@ export default function Alert({ type, message }) {
       : "bg-gray-500";
 
   return (
-    <div className={` text-white px-4 py-2 rounded shadow ${color}`}>
+    <div className={`animate-toast-enter w-[100%] md:w-[40%] lg:w-[40%] text-white text-center mx-auto px-4 py-3 rounded shadow ${color}`}>
       {message}
     </div>
   );

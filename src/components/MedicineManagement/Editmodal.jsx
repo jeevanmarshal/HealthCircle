@@ -5,9 +5,7 @@ export default function Editmodal({
   editModal,
   setEditModal,
   selectedData,
-  fetchMedicines,
-  updateMedicine,
-  showAlert
+  updateMedicine
 }) {
   const [form, setForm] = useState({
     name: "",
@@ -23,21 +21,14 @@ export default function Editmodal({
   }, [selectedData]);
 
   const handleUpdate = async () => {
-    try {
-      await updateMedicine(selectedData.id, form);
-      fetchMedicines();
-      showAlert("success", "Medicine updated!");
-    } catch {
-      showAlert("error", "Update failed!");
-    }
-    setEditModal(false);
+    await updateMedicine();
   };
 
   if (!editModal) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-4 rounded-lg w-96 shadow-xl">
+    <div className="animate-fadeIn fixed inset-0 bg-black/50 flex justify-center items-center">
+      <div className="animate-scaleIn bg-white p-4 rounded-lg w-96 shadow-xl">
         <h3 className="text-lg font-semibold mb-4">💊 Edit Medicine</h3>
 
         <div className="space-y-3">
@@ -52,6 +43,22 @@ export default function Editmodal({
           <button onClick={handleUpdate} className="px-4 py-2 bg-green-600 text-white rounded">Save</button>
         </div>
       </div>
+            <style>{`
+        .animate-fadeIn {
+          animation: fadeIn 0.25s ease;
+        }
+        .animate-scaleIn {
+          animation: scaleIn 0.25s ease;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+          from { transform: scale(0.9); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }

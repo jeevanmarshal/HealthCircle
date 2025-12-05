@@ -16,7 +16,7 @@ import {
 export default function MedicinePage() {
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [medicines, setMedicines] = useState([]);
+  const [medicines, setMedicines] = useState([{ name: "jkhfk", dosage: "lkf", time: "4.00 PM", days: "aa" }]);
 
   const [selectedData, setSelectedData] = useState(null);
 
@@ -39,7 +39,7 @@ export default function MedicinePage() {
       const res = await getMedicines();
       setMedicines(res.data);
     } catch (error) {
-      showAlert("error", "Failed to fetch medicines!");
+      showAlert("error", "Failed to fetch medicines");
     }
     setLoading(false);
   };
@@ -58,23 +58,55 @@ export default function MedicinePage() {
         setEditModal={setEditModal}
         deleteMedicine={deleteMedicine}
         fetchMedicines={fetchMedicines}
+        deletemedicine={async (id) => {
+          setLoading(true);
+          try {
+            await deleteMedicine(id);
+            showAlert("success", "Medicine deleted");
+            await fetchMedicines();
+          } catch (err) {
+            showAlert("error", "Delete failed");
+          } finally {
+            setLoading(false);
+          }
+        }}
       />
 
       <Modal
         showModal={showModal}
         setShowModal={setShowModal}
-        addMedicine={addMedicine}
-        fetchMedicines={fetchMedicines}
-        showAlert={showAlert}
+        addMedicine={async (data) => {
+                  setLoading(true);
+                  setShowModal(false);
+                  try {
+                    await addMedicine(data);
+                    showAlert("success", "Medicine added");
+                    await fetchMedicines();
+                  } catch (err) {
+                    showAlert("error", "Failed to add medicine");
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
       />
 
       <Editmodal
         editModal={editModal}
         setEditModal={setEditModal}
         selectedData={selectedData}
-        fetchMedicines={fetchMedicines}
-        updateMedicine={updateMedicine}
-        showAlert={showAlert}
+        updateMedicine={async (id, data) => {
+                  setLoading(true);
+                 setEditModal(false) 
+                  try {
+                    await updateMedicine(id, data);
+                    showAlert("success", "Medicine updated");
+                    await fetchMedicines();
+                  } catch (err) {
+                    showAlert("error", "Update failed");
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
       />
     </div>
   );
